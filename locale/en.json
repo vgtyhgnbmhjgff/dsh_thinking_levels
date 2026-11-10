@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Thinking levels",
+    "description": "Detects every configured custom model and lets each one pick its own thinking levels, written back to reasoningEfforts."
+  }
+}

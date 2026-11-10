@@ -1,0 +1,47 @@
+{
+  "name": "dsh-thinking-levels",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Auto-detects every custom model configured on the llm-pi-ai row and gives each one its own thinking-level (reasoning effort) configuration in a dedicated Settings sidebar page.",
+  "license": "MIT",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./package.json": "./package.json",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "README.md",
+    "locale/*.json",
+    "icon.svg"
+  ],
+  "icon": "./icon.svg",
+  "meta": {
+    "title": {
+      "en": "Thinking levels",
+      "zh": "思考等级"
+    },
+    "description": {
+      "en": "Detects every configured custom model and lets each one pick its own thinking levels, written back to reasoningEfforts.",
+      "zh": "自動識別所有已配置的自訂模型，為每個模型單獨設置思考等級，寫回 reasoningEfforts。"
+    }
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-connection",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-settings"
+      ]
+    }
+  }
+}

@@ -1,0 +1,37 @@
+# dsh-thinking-levels — bundle patch layer.
+#
+# A top-level YAML array of Loader patch entries, exactly like the profile's own
+# `cordis.patch.yml`. This layer only inserts this plugin's own row; it never
+# touches the `llm-pi-ai` row, whose `providers[].models[].reasoningEfforts` this
+# plugin edits at runtime through the Host `configEditor` service (which persists
+# and reconciles in one step, under the same file lock as the app).
+#
+# Installed with:  plugin_manager { action: install_bundle, target: <this dir> }
+
+- insert:
+    - id: thinking-levels
+      # Resolved from the PROFILE plane (profiles/<name>/node_modules), which is
+      # where `install_bundle` links this package.
+      name: 'dsh-thinking-levels'
+      config:
+        enabled: true
+
+        # The row whose `providers` object is the single source of truth for every
+        # custom model. `targetRowId` is matched first, `targetModule` is the
+        # fallback when the row was inserted under a different id.
+        targetRowId: llm-pi-ai
+        targetModule: '@deepseek-ai/dsh-llm-pi-ai'
+
+        # Loopback RPC channel shared with the browser half of this plugin.
+        channel: /dsh-thinking-levels
+
+        # DSH level universe offered per model. Omit to use the built-in list
+        # (off/minimal/low/medium/high/xhigh/max).
+        # levels: [off, minimal, low, medium, high, xhigh, max]
+
+        # Refuse a write while fewer than this many profile rows are mounted:
+        # during a partial boot the tree is not trustworthy.
+        minEntriesBeforeWrite: 8
+
+        # Report only, never write to the profile.
+        dryRun: false

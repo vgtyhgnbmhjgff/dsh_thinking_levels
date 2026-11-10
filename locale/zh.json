@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "思考等級",
+    "description": "自動識別所有已配置的自訂模型，為每個模型單獨設置思考等級，寫回 reasoningEfforts。"
+  }
+}
